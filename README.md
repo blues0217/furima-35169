@@ -19,17 +19,17 @@
 
 ## itemsテーブル
 
-| Column             | Type       | Options      |
-| ------------------ | ---------- | ------------ |
-| name          | string     | null: false  |
-| description        | text       | null: false  |
-| detail_category_id | integer    | null: false  |
-| detail_status_id   | integer    | null: false  |
-| delivery_fee_id    | integer    | null: false  |
-| delivery_area_id   | integer    | null: false  |
-| delivery_day_id    | integer    | null: false  |
-| price              | integer    | null: false  |
-| user               | references |              |
+| Column             | Type       | Options           |
+| ------------------ | ---------- | ----------------- |
+| name               | string     | null: false       |
+| description        | text       | null: false       |
+| detail_category_id | integer    | null: false       |
+| detail_status_id   | integer    | null: false       |
+| delivery_fee_id    | integer    | null: false       |
+| delivery_area_id   | integer    | null: false       |
+| delivery_day_id    | integer    | null: false       |
+| price              | integer    | null: false       |
+| user               | references | foreign_key: true |
 
 
 ### Association
@@ -39,12 +39,12 @@
 
 ## commentsテーブル
 
-| Column           | Type       | Options      |
-| ---------------- | ---------- | ------------ |
-| text             | text       | null: false  |  
-| user             | references |              |
-| item             | references |              |
-| purchase_history | references |              |
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| text             | text       | null: false       |  
+| user             | references | foreign_key: true |
+| item             | references | foreign_key: true |
+| purchase_history | references | foreign_key: true |
 
 
 ### Association
