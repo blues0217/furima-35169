@@ -21,7 +21,7 @@
 
 | Column             | Type       | Options      |
 | ------------------ | ---------- | ------------ |
-| item_name          | string     | null: false  |
+| name          | string     | null: false  |
 | description        | text       | null: false  |
 | detail_category_id | integer    | null: false  |
 | detail_status_id   | integer    | null: false  |
@@ -53,10 +53,10 @@
 
 ## purchase_historiesテーブル
 
-| Column    | Type       | Options      |
-| --------- | ---------- | ------------ |
-| user      | references |              |
-| item      | references |              |
+| Column    | Type       | Options           |
+| --------- | ---------- | ----------------- |
+| user      | references | foreign_key: true |
+| item      | references | foreign_key: true |
 
 
 ### Association
@@ -66,15 +66,15 @@
 
 ## addressesテーブル
 
-| Column           | Type       | Options      |
-| ---------------- | ---------- | ------------ |
-| post_number      | string     | null: false  |
-| delivery_area_id | integer    | null: false  |
-| city             | string     | null: false  |
-| house_number     | string     | null: false  |
-| building         | string     |              |
-| phone_number     | string     | null: false  |
-| purchase_history | references |              |
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| post_number      | string     | null: false       |
+| delivery_area_id | integer    | null: false       |
+| city             | string     | null: false       |
+| house_number     | string     | null: false       |
+| building         | string     |                   |
+| phone_number     | string     | null: false       |
+| purchase_history | references | foreign_key: true |
 
 ### Association
 - belongs_to :purchase_history
