@@ -19,22 +19,21 @@
 
 ## itemsテーブル
 
-| Column           | Type       | Options      |
-| ---------------- | ---------- | ------------ |
-| item_name        | string     | null: false  |
-| description      | text       | null: false  |
-| detail_category  | date       | null: false  |
-| detail_status    | date       | null: false  |
-| delivery_fee     | date       | null: false  |
-| delivery_area    | date       | null: false  |
-| delivery_day     | date       | null: false  |
-| price            | string     | null: false  |
-| user             | references |              |
-| purchase_history | references |              |
+| Column             | Type       | Options      |
+| ------------------ | ---------- | ------------ |
+| item_name          | string     | null: false  |
+| description        | text       | null: false  |
+| detail_category_id | integer    | null: false  |
+| detail_status_id   | integer    | null: false  |
+| delivery_fee_id    | integer    | null: false  |
+| delivery_area_id   | integer    | null: false  |
+| delivery_day_id    | integer    | null: false  |
+| price              | integer    | null: false  |
+| user               | references |              |
 
 
 ### Association
-- belongs_to :users
+- belongs_to :user
 - belongs_to :purchase_histories
 - has_many :comments
 
@@ -49,20 +48,21 @@
 
 
 ### Association
-- belongs_to :users
-- belongs_to :items
+- belongs_to :user
+- belongs_to :item
 
 ## purchase_historiesテーブル
 
 | Column    | Type       | Options      |
 | --------- | ---------- | ------------ |
 | user      | references |              |
+| item      | references |              |
 
 
 ### Association
-- has_many :items
-- belongs_to :users
-- has_one :addresses
+- belongs_to :item
+- belongs_to :user
+- has_one :address
 
 ## addressesテーブル
 
