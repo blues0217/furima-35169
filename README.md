@@ -34,7 +34,7 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :purchase_histories
+- has_one :purchase_histories
 - has_many :comments
 
 ## commentsテーブル
@@ -69,8 +69,12 @@
 | Column           | Type       | Options      |
 | ---------------- | ---------- | ------------ |
 | post_number      | string     | null: false  |
-| prefectures      | date       | null: false  |
+| delivery_area_id | integer    | null: false  |
 | city             | string     | null: false  |
 | house_number     | string     | null: false  |
 | building         | string     |              |
 | phone_number     | string     | null: false  |
+| purchase_history | references |              |
+
+### Association
+- belongs_to :purchase_history
