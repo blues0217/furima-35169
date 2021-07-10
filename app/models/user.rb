@@ -9,5 +9,4 @@ class User < ApplicationRecord
   validates :family_name_hurigana, presence: true
   validates :first_name_hurigana, presence: true
   validates :birthday, presence: true
-
 end
