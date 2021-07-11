@@ -20,22 +20,22 @@ RSpec.describe User, type: :model do
     it 'family_name_zenkakuが空では登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', password: 'test000000', password_confirmation: 'test000000', family_name_zenkaku: '', first_name_zenkaku:'名前', family_name_hurigana:'ミョウジ', first_name_hurigana:'ナマエ', birthday:'20210707')
       user.valid?
-      expect(user.errors.full_messages).to include("Family_name_zenkaku can't be blank")
+      expect(user.errors.full_messages).to include("Family name zenkaku can't be blank")
     end
     it 'first_name_zenkakuが空では登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', password: 'test000000', password_confirmation: 'test000000', family_name_zenkaku: '苗字', first_name_zenkaku:'', family_name_hurigana:'ミョウジ', first_name_hurigana:'ナマエ', birthday:'20210707')
       user.valid?
-      expect(user.errors.full_messages).to include("First_name_zenkaku can't be blank")
+      expect(user.errors.full_messages).to include("First name zenkaku can't be blank")
     end
     it 'family_name_huriganaが空では登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', password: 'test000000', password_confirmation: 'test000000', family_name_zenkaku: '苗字', first_name_zenkaku:'名前', family_name_hurigana:'', first_name_hurigana:'ナマエ', birthday:'20210707')
       user.valid?
-      expect(user.errors.full_messages).to include("Ffamily_name_hurigana can't be blank")
+      expect(user.errors.full_messages).to include("Family name hurigana can't be blank")
     end
     it 'first_name_huriganaが空では登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', password: 'test000000', password_confirmation: 'test000000', family_name_zenkaku: '苗字', first_name_zenkaku:'名前', family_name_hurigana:'ミョウジ', first_name_hurigana:'', birthday:'20210707')
       user.valid?
-      expect(user.errors.full_messages).to include("First_name_hurigana can't be blank")
+      expect(user.errors.full_messages).to include("First name hurigana can't be blank")
     end
     it 'birthdayが空では登録できない' do
       user = User.new(nickname: 'test', email: 'test@example', password: 'test000000', password_confirmation: 'test000000', family_name_zenkaku: '苗字', first_name_zenkaku:'名前', family_name_hurigana:'ミョウジ', first_name_hurigana:'ナマエ', birthday:'')
