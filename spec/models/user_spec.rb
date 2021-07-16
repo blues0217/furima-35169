@@ -10,42 +10,6 @@ RSpec.describe User, type: :model do
       it '全ての項目が存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      it 'nicknameが登録できる' do
-        @user.nickname = 'test'
-        expect(@user).to be_valid
-      end
-      it 'emailが登録できる' do
-        @user.email = 'test@example'
-        expect(@user).to be_valid
-      end
-      it 'passwordが登録できる' do
-        @user.password = 'test0000'
-        expect(@user).to be_valid
-      end
-      it 'password_confirmationが登録できる' do
-        @user.password_confirmation = 'test0000'
-        expect(@user).to be_valid
-      end
-      it 'family_name_zenkakuが登録できる' do
-        @user.family_name_zenkaku = '苗字'
-        expect(@user).to be_valid
-      end
-      it 'first_name_zenkakuが登録できる' do
-        @user.first_name_zenkaku = '名前'
-        expect(@user).to be_valid
-      end
-      it 'family_name_huriganaが登録できる' do
-        @user.family_name_hurigana = 'ミョウジ'
-        expect(@user).to be_valid
-      end
-      it 'first_name_huriganaが登録できる' do
-        @user.first_name_hurigana = 'ナマエ'
-        expect(@user).to be_valid
-      end
-      it 'birthdayが登録できる' do
-        @user.birthday = '20210707'
-        expect(@user).to be_valid
-      end
     end
 
     context '新規登録できない時' do
@@ -76,8 +40,18 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password can't be blank")
       end
-      it "passwordが半角英数字混合でなければ登録できない" do
+      it "passwordが半角数字のみでは登録できない" do
+        @user.password = "000000"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it "passwordが半角英字のみでは登録できない" do
         @user.password = "testtest"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it "passwordが全角文字では登録ができない" do
+        @user.password = "test００００"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
