@@ -38,6 +38,12 @@ class OrdersController < ApplicationController
 
   def security_order
     @item = Item.find(params[:item_id])
-    redirect_to root_path unless user_signed_in? && current_user.id != @item.user_id
+    if @item.order.present?
+      redirect_to root_path
+    elsif user_signed_in? && current_user.id != @item.user_id
+      render :index
+    else
+      redirect_to root_path
+    end
   end
 end
