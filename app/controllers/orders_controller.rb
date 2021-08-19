@@ -1,8 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :security_order, except: [:create]
+
   def index
     @order = Order.new
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
+    
   end
 
   def create
@@ -31,5 +34,10 @@ class OrdersController < ApplicationController
       card: order_params[:token],    
       currency: 'jpy'                
     )
+  end
+
+  def security_order
+    @item = Item.find(params[:item_id])
+    redirect_to root_path unless user_signed_in? && current_user.id != @item.user_id
   end
 end
