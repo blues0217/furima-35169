@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
     if @item.order.present? || current_user.id == @item.user_id
       redirect_to root_path 
     else
-      redirect_to item_path(@item.id)
+      render :index
     end
   end
 end
