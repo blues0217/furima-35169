@@ -4,6 +4,7 @@ class OrderAddress
   with_options presence: true do
     validates :delivery_area_id
     validates :user_id
+    validates :item_id
     validates :phone_number
     validates :post_number, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :token
