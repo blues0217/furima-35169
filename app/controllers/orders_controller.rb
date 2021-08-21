@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, except: [:create]
   before_action :security_order, except: [:create]
-
+  
   def index
     @order = Order.new
     @item = Item.find(params[:item_id])
@@ -39,7 +40,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     if @item.order.present?
       redirect_to root_path
-    elsif user_signed_in? && current_user.id != @item.user_id
+    elsif current_user.id != @item.user_id
     else
       redirect_to root_path
     end
