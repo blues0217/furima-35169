@@ -13,14 +13,6 @@ RSpec.describe OrderAddress, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_address).to be_valid
       end
-      it 'cityは空でも保存できること' do
-        @order_address.city = ''  
-        @order_address.valid?
-      end
-      it 'house_numberは空でも保存できること' do
-        @order_address.house_number = ''  
-        @order_address.valid?
-      end
       it 'buildingは空でも保存できること' do
         @order_address.building = ''  
         @order_address.valid?
@@ -38,6 +30,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Post number is invalid. Include hyphen(-)")
       end
+      it '市区町村が空だと登録できない' do
+        @order_address.city = ''  
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("City can't be blank")
+      end
+      it '番地が空だと登録できない' do
+        @order_address.house_number = ''  
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("House number can't be blank")
+      end
       it '配送エリアが「--」だと登録できない' do
         @order_address.delivery_area_id = 1  
         @order_address.valid?
@@ -48,10 +50,35 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Phone number can't be blank")
       end
+      it '電話番号が9桁以下だと登録できない' do
+        @order_address.phone_number = 123456789  
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include
+      end
+      it '電話番号が12桁以上だと登録できない' do
+        @order_address.phone_number = 123456789012  
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include
+      end
+      it '電話番号に半角数字以外が含まれている場合は購入できない（※半角数字以外が一文字でも含まれていれば良い）' do
+        @order_address.phone_number = 'aaaaaaaaaa'  
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include
+      end
+      it 'tokenが空だと登録できない' do
+        @order_address.token = ''
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
       it 'userが紐付いていないと登録できないこと' do
         @order_address.user_id = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐付いていないと登録できないこと' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
