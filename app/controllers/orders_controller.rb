@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
     @order = Order.new
     @item = Item.find(params[:item_id])
     @order_address = OrderAddress.new
-    
   end
 
   def create
@@ -41,7 +40,6 @@ class OrdersController < ApplicationController
     if @item.order.present?
       redirect_to root_path
     elsif user_signed_in? && current_user.id != @item.user_id
-      render :index
     else
       redirect_to root_path
     end
